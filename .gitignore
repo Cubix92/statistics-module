@@ -1,0 +1,15 @@
+.vagrant/
+.idea
+vendor/
+config/development.config.php
+data/log/*
+!data/log/.gitkeep
+data/cache/*
+data/Resources/*
+!data/cache/.gitkeep
+!data/languages/
+data/mysql/*
+phpunit.xml
+nbproject
+docker/.ssh/*
+!docker/.ssh/.gitkeep

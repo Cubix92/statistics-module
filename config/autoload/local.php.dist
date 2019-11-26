@@ -1,0 +1,33 @@
+<?php
+
+use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
+
+return [
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'driverClass' => PDOMySqlDriver::class,
+                'params' => [
+                    'host'     => '127.0.0.1',
+                    'user'     => '',
+                    'password' => '',
+                    'dbname'   => '',
+                    'charset'  => 'utf8'
+                ]
+            ],
+        ],
+    ],
+    'adserver_synchronization' => [
+        'host' => '',
+        'auth' => [
+            'endpoint' => '/api/revive_ui/token',
+            'username' => 'root',
+            'password' => 'root'
+        ],
+        'url' => [
+            'advertiser' => '/api/revive_ui//get_all_advertiser/',
+            'campaign' => '/api/revive_ui/get_all_campaigns/',
+            'banner' => '/api/revive_ui/get_all_banner/'
+        ]
+    ]
+];

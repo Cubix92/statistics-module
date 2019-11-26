@@ -1,0 +1,45 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: statistics_web
+    restart: always
+    tty: true
+    links:
+      - db
+    environment:
+      - XDEBUG_CONFIG="remote_host=10.3.0.2"
+      - PHP_IDE_CONFIG="serverName=statistics-module.local"
+    networks:
+      plus_network:
+        aliases:
+          - statistics-module.local
+        ipv4_address: 10.1.0.1
+    volumes:
+      - .:/var/www/statistics
+  db:
+    image: mysql:5.7
+    container_name: statistics_db
+    ports:
+      - 50202:3306
+    expose:
+      - 50202
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=statistics
+      - MYSQL_USER=statistics
+      - MYSQL_PASSWORD=statistics
+    restart: always
+    networks:
+      plus_network:
+        aliases:
+          - db
+        ipv4_address: 10.1.0.2
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+networks:
+  plus_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.1.0.0/16
